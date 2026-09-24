@@ -1,7 +1,7 @@
 services:
   mysql:
     image: mysql:8.0
-    container_name: mysql
+    container_name: fastfood-pagamentos-db
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: fastfood_pagamentos

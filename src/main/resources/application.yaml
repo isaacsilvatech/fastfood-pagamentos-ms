@@ -1,6 +1,6 @@
 spring:
   application:
-    name: fastfood-pagamentos-miscroservice
+    name: fastfood-pagamentos-ms
 
   datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -12,3 +12,11 @@ spring:
     show-sql: true
     properties:
       hibernate.format_sql: true
+
+server:
+  port: 0
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

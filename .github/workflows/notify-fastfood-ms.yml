@@ -1,0 +1,21 @@
+name: Notify Fastfood
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notificar repositório principal
+        env:
+          GH_TOKEN: ${{ secrets.PARENT_REPO_TOKEN }}
+        run: |
+          gh api \
+            --method POST \
+            repos/isaacsilvatech/fastfood-ms/dispatches \
+            -f event_type=submodule_updated \
+            -f 'client_payload[submodule]=fastfood-pagamentos-ms'

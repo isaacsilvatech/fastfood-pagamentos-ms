@@ -2,6 +2,7 @@ package br.com.isaacsilva.tech.fastfood.pagamentos.controller;
 
 import br.com.isaacsilva.tech.fastfood.pagamentos.dto.PagamentoDto;
 import br.com.isaacsilva.tech.fastfood.pagamentos.service.PagamentoService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -53,8 +54,13 @@ public class PagamentoController {
         return ResponseEntity.noContent().build();
     }
 
+    @CircuitBreaker(name = "pagamento-confirmarPagamento", fallbackMethod = "pagamentoAutorizadoComIntegracaoPendente")
     @PatchMapping("/{id}/confirmar")
     public void confirmarPagamento(@PathVariable @NotNull Long id) {
         service.confirmarPagamento(id);
+    }
+
+    public void pagamentoAutorizadoComIntegracaoPendente(Long id, Exception e) {
+        service.alteraStatus(id);
     }
 }

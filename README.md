@@ -11,5 +11,3 @@
  - ModelMapper
  - Gradle (Kotlin)
  - Mysql
- 
-_Feito sem IA!!!_
